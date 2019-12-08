@@ -35,7 +35,7 @@ public class U5Actividad1SNM {
         String respuestaUsuario;
         
         System.out.println(palabraSecreta);
-        boolean seHaAcertado;
+        Boolean seHaAcertado;
         
         do {
             
@@ -48,14 +48,14 @@ public class U5Actividad1SNM {
      * Método de nivel 3: Genera una letra aleatoria
      * @return la letra aleatoria generada
      */
-    public char generarLetraAleatoria() {
+    public Character generarLetraAleatoria() {
         Random rdn = new Random();
         
-        int ASCIIcaracterA = 97;
-        int ASCIIcaracterZ = 122;
+        Integer ASCIIcaracterA = 97;
+        Integer ASCIIcaracterZ = 122;
 
-        int numAleatorio = (int) (rdn.nextInt(ASCIIcaracterZ - ASCIIcaracterA) + ASCIIcaracterA);
-        return (char) numAleatorio;
+        Character numAleatorio = (char) (rdn.nextInt(ASCIIcaracterZ - ASCIIcaracterA) + ASCIIcaracterA);
+        return numAleatorio;
     }
 
     /**
@@ -67,7 +67,7 @@ public class U5Actividad1SNM {
 
         String palabra = "";
 
-        for (int i = 0; i < 5; i++) {
+        for (Integer i = 0; i < 5; i++) {
             palabra += generarLetraAleatoria();
         }
 
@@ -88,14 +88,14 @@ public class U5Actividad1SNM {
      * @param respuesta La respuesta a analizar su formato
      * @return CIERTO si es un formato válido (5 letras y minúsculas), FALSO en cualquier otro caso
      */
-    public boolean comprobarFormato(String respuesta) {
+    public Boolean comprobarFormato(String respuesta) {
 
         if (respuesta.length() != 5) {
             return false;
         } else {
-            for (int i = 0; i < respuesta.length(); i++) {
+            for (Integer i = 0; i < respuesta.length(); i++) {
 
-                char letraRespuesta = respuesta.charAt(i);
+                Character letraRespuesta = respuesta.charAt(i);
                 if (letraRespuesta < 'a' || letraRespuesta > 'z') {
                     return false;
                 }
@@ -114,7 +114,7 @@ public class U5Actividad1SNM {
     public String generarPista(String palabraSecreta, String respuesta) {
 
         String pista = "";
-        for (int i = 0; i < palabraSecreta.length(); i++) {
+        for (Integer i = 0; i < palabraSecreta.length(); i++) {
             String letra = String.valueOf(respuesta.charAt(i));
             
             if (respuesta.charAt(i) == palabraSecreta.charAt(i)) {
@@ -133,9 +133,9 @@ public class U5Actividad1SNM {
      * @param pista La pista a analizar
      * @return CIERTO si es la pista ganadora (00000) o falso en cualquier otro caso
      */
-    public boolean darRespuesta(String pista) {
+    public Boolean darRespuesta(String pista) {
 
-        boolean esPistaGanadora = pista.equals("00000");
+        Boolean esPistaGanadora = pista.equals("00000");
         
         System.out.print("La respuesta es [" + pista + "].");
         
@@ -163,7 +163,7 @@ public class U5Actividad1SNM {
     public String pedirRespuestaEnFormatoValido() {
 
         String respuestaUsuario;
-        boolean esFormatoCorrecto;
+        Boolean esFormatoCorrecto;
 
         do {
 
@@ -179,10 +179,10 @@ public class U5Actividad1SNM {
      * @param respuesta La respuesta introducida por el usuario
      * @return CIERTO si la palabra secreta y la respuesta son iguales, FALSO en cualquier otro caso
      */
-    public boolean resolverRespuesta(String palabraSecreta, String respuesta) {
+    public Boolean resolverRespuesta(String palabraSecreta, String respuesta) {
 
         String pista = generarPista(palabraSecreta, respuesta);
-        boolean esRespuestaCorrecta = darRespuesta(pista);
+        Boolean esRespuestaCorrecta = darRespuesta(pista);
 
         return esRespuestaCorrecta;
     }
