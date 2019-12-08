@@ -5,14 +5,16 @@
  */
 package u5actividad1snm;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
  *
- * @author zacht3000
+ * @author Santiago Naranjo Marcillo
  */
 public class U5Actividad1SNM {
 
+    private Scanner scanner = new Scanner(System.in);
  
     /**
      * Método principal main
@@ -47,10 +49,12 @@ public class U5Actividad1SNM {
      * @return la letra aleatoria generada
      */
     public char generarLetraAleatoria() {
+        Random rdn = new Random();
+        
         int ASCIIcaracterA = 97;
         int ASCIIcaracterZ = 122;
 
-        int numAleatorio = (int) (Math.random() * (ASCIIcaracterZ - ASCIIcaracterA) + ASCIIcaracterA);
+        int numAleatorio = (int) (rdn.nextInt(ASCIIcaracterZ - ASCIIcaracterA) + ASCIIcaracterA);
         return (char) numAleatorio;
     }
 
@@ -75,7 +79,6 @@ public class U5Actividad1SNM {
      * @return La cadena de texto introducida por el usuario
      */
     public String leerRespuesta() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Escribe 5 letras minúsculas: ");
         return scanner.nextLine();
     }
