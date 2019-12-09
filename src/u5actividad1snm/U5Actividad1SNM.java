@@ -31,15 +31,19 @@ public class U5Actividad1SNM {
      */
     public void inicio() {
         
-        String palabraSecreta = generarPalabraSecreta();
         String respuestaUsuario;
+        String textoRespuesta;
+        Integer respuestaTamaño;
         
-        System.out.println(palabraSecreta);
         Boolean seHaAcertado;
         
         do {
+            respuestaTamaño = validarTamaño();
+            String palabraSecreta = generarPalabraSecreta(respuestaTamaño);
             
-            respuestaUsuario = pedirRespuestaEnFormatoValido();
+            System.out.println(palabraSecreta);
+            
+            respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
             seHaAcertado = resolverRespuesta(palabraSecreta, respuestaUsuario);
         }while(!seHaAcertado);
     }
@@ -63,11 +67,11 @@ public class U5Actividad1SNM {
      * @return la palabra aleatoria de longitud cinco
      */
     
-    public String montarPalabra() {
+   public String montarPalabra(Integer tamaño) {
 
-        String palabra = "";
+        String palabra = "";       
 
-        for (Integer i = 0; i < 5; i++) {
+        for (Integer i = 0; i < tamaño; i++) {
             palabra += generarLetraAleatoria();
         }
 
@@ -78,8 +82,11 @@ public class U5Actividad1SNM {
      * Método de nivel 2: Pide al usuario que introduzca una cadena de texto
      * @return La cadena de texto introducida por el usuario
      */
+//   public String preguntaTexto(Integer tamaño) {
+//       String texto = "Escribe " +  tamaño + " letras minúsculas: ";
+//       return texto;
+//    }
     public String leerRespuesta() {
-        System.out.print("Escribe 5 letras minúsculas: ");
         return scanner.nextLine();
     }
 
@@ -151,22 +158,22 @@ public class U5Actividad1SNM {
      * Genera una palabra secreta
      * @return La palabra secreta generada
      */
-    public String generarPalabraSecreta() {
+    public String generarPalabraSecreta(Integer tamaño) {
 
-        return montarPalabra();
+        return montarPalabra(tamaño);
     }
 
     /**
      * Pide al usuario que introduzca una palabra para adivinar la palabra secreta
      * @return La palabra inntroducida por el usuario cumpliendo con el formato establecido
      */
-    public String pedirRespuestaEnFormatoValido() {
+    public String pedirRespuestaEnFormatoValido(Integer tamaño) {
 
         String respuestaUsuario;
         Boolean esFormatoCorrecto;
 
         do {
-
+            System.out.print("Escribe " +  tamaño + " letras minúsculas: ");
             respuestaUsuario = leerRespuesta();
             esFormatoCorrecto = comprobarFormato(respuestaUsuario);
         } while (!esFormatoCorrecto);
@@ -186,4 +193,45 @@ public class U5Actividad1SNM {
 
         return esRespuestaCorrecta;
     }
+    /*--------------------------------------------------------------------------/
+                                    MEJORAS
+    /--------------------------------------------------------------------------*/
+    
+    /**
+     * MEJORA AÑADIR TAMAÑO
+     * @param leerTamaño Leer el tamaño
+     * @param comprobarTamaño Devuelve un valor booleano, para comprobar si esta entre 1 y 8
+     * @return CIERTO si el número se encuentra entre 1 y 8, FALSO si no
+     * @param validarTamaño Devuelve el valor introducido una vez haya pasado el filtro
+     */
+        
+    public Integer leerTamaño() {
+        System.out.print("¿Qué tamaño de palabra quieres?: ");
+        return scanner.nextInt();
+    }
+    
+    public Boolean comprobarTamaño(Integer respuestaTamaño){
+        
+        if(respuestaTamaño >= 1 && respuestaTamaño <= 8)
+            return true;      
+        else
+            return false;
+    
+    }
+    
+    public Integer validarTamaño(){
+        
+        Integer respuestaTamaño;
+        Boolean tamañoCorrecto;
+        
+        do{
+            respuestaTamaño = leerTamaño();
+            scanner.nextLine();
+            tamañoCorrecto = comprobarTamaño(respuestaTamaño);            
+        }while(!tamañoCorrecto);
+        
+        return respuestaTamaño;
+
+    }
+    
 }
