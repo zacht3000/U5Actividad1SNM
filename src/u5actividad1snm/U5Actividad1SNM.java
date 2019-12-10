@@ -243,9 +243,9 @@ public class U5Actividad1SNM {
      /**
      * MEJORA AÑADIR INTENTOS
      * @param leerIntentos Leer el tamaño
-     * @param validarItentos Devuelve un valor booleano, para comprobar si esta entre 1 y 8
+     * @param validarIntentos Devuelve un valor booleano, para comprobar si esta entre 1 y 8
      * @return CIERTO si el número se encuentra entre 1 y 8, FALSO si no
-     * @param validarTamaño Devuelve el valor introducido una vez haya pasado el filtro
+     * @param validarIntentos Devuelve el valor introducido una vez haya pasado el filtro
      */
     
     
