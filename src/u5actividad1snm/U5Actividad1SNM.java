@@ -30,19 +30,24 @@ public class U5Actividad1SNM {
      * Método inicio
      */
     public void inicio() {
-        
+        /* Decalarció0n variables */
         String respuestaUsuario;
         String textoRespuesta;
         Integer respuestaTamaño;
+        Integer respuestaIntentos;
         
         Boolean seHaAcertado;
         
+        /* Metodos */
+        respuestaTamaño = validarTamaño();
+        scanner.nextLine(); // Limpiar Buffer
+        respuestaIntentos = validarIntentos();
+        scanner.nextLine(); // Limpiar Buffer
+        String palabraSecreta = generarPalabraSecreta(respuestaTamaño);
+        
         do {
-            respuestaTamaño = validarTamaño();
-            String palabraSecreta = generarPalabraSecreta(respuestaTamaño);
-            
             System.out.println(palabraSecreta);
-            
+
             respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
             seHaAcertado = resolverRespuesta(palabraSecreta, respuestaUsuario);
         }while(!seHaAcertado);
@@ -86,7 +91,8 @@ public class U5Actividad1SNM {
 //       String texto = "Escribe " +  tamaño + " letras minúsculas: ";
 //       return texto;
 //    }
-    public String leerRespuesta() {
+    public String leerRespuesta(Integer tamaño) {
+        System.out.print("Escribe " +  tamaño + " letras minúsculas: ");
         return scanner.nextLine();
     }
 
@@ -96,7 +102,7 @@ public class U5Actividad1SNM {
      * @return CIERTO si es un formato válido (5 letras y minúsculas), FALSO en cualquier otro caso
      */
     public Boolean comprobarFormato(String respuesta) {
-
+        
         if (respuesta.length() != 5) {
             return false;
         } else {
@@ -108,7 +114,6 @@ public class U5Actividad1SNM {
                 }
             }
         }
-
         return true;
     }
 
@@ -172,10 +177,10 @@ public class U5Actividad1SNM {
         String respuestaUsuario;
         Boolean esFormatoCorrecto;
 
-        do {
-            System.out.print("Escribe " +  tamaño + " letras minúsculas: ");
-            respuestaUsuario = leerRespuesta();
-            esFormatoCorrecto = comprobarFormato(respuestaUsuario);
+        do {            
+            respuestaUsuario = leerRespuesta(tamaño);
+            
+            esFormatoCorrecto = comprobarFormato(respuestaUsuario);       
         } while (!esFormatoCorrecto);
 
         return respuestaUsuario;
@@ -203,10 +208,11 @@ public class U5Actividad1SNM {
      * @param comprobarTamaño Devuelve un valor booleano, para comprobar si esta entre 1 y 8
      * @return CIERTO si el número se encuentra entre 1 y 8, FALSO si no
      * @param validarTamaño Devuelve el valor introducido una vez haya pasado el filtro
-     */
+     **/
         
     public Integer leerTamaño() {
         System.out.print("¿Qué tamaño de palabra quieres?: ");
+    
         return scanner.nextInt();
     }
     
@@ -226,12 +232,12 @@ public class U5Actividad1SNM {
         
         do{
             respuestaTamaño = leerTamaño();
-            scanner.nextLine();
             tamañoCorrecto = comprobarTamaño(respuestaTamaño);            
         }while(!tamañoCorrecto);
         
         return respuestaTamaño;
 
     }
+
     
 }
