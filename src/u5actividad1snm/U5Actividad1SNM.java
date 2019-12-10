@@ -35,7 +35,6 @@ public class U5Actividad1SNM {
         String textoRespuesta;
         Integer respuestaTamaño;
         Integer respuestaIntentos;
-        
         Boolean seHaAcertado;
         
         /* Metodos */
@@ -47,9 +46,12 @@ public class U5Actividad1SNM {
         
         do {
             System.out.println(palabraSecreta);
-
-            respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
+            
+            respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);   
             seHaAcertado = resolverRespuesta(palabraSecreta, respuestaUsuario);
+            if(respuestaIntentos-- <= 1)
+                seHaAcertado = true;
+                
         }while(!seHaAcertado);
     }
 
@@ -176,11 +178,9 @@ public class U5Actividad1SNM {
 
         String respuestaUsuario;
         Boolean esFormatoCorrecto;
-
         do {            
             respuestaUsuario = leerRespuesta(tamaño);
-            
-            esFormatoCorrecto = comprobarFormato(respuestaUsuario);       
+            esFormatoCorrecto = comprobarFormato(respuestaUsuario); 
         } while (!esFormatoCorrecto);
 
         return respuestaUsuario;
@@ -238,6 +238,40 @@ public class U5Actividad1SNM {
         return respuestaTamaño;
 
     }
-
+    
+    
+     /**
+     * MEJORA AÑADIR INTENTOS
+     * @param leerIntentos Leer el tamaño
+     * @param validarItentos Devuelve un valor booleano, para comprobar si esta entre 1 y 8
+     * @return CIERTO si el número se encuentra entre 1 y 8, FALSO si no
+     * @param validarTamaño Devuelve el valor introducido una vez haya pasado el filtro
+     */
+    
+    
+    public Integer leerIntentos(){
+        System.out.print("¿Cuántos intentos máximo?: ");
+        
+        return scanner.nextInt();
+    }
+    public Boolean comprobarIntentos(Integer respuestaIntentos){
+        
+        if(respuestaIntentos >= 5 && respuestaIntentos <= 15)
+            return true;
+        else
+           return false;
+    }
+    public Integer validarIntentos(){
+        
+        Integer respuestaIntentos;
+        Boolean intentosCorrecto;
+        
+        do{
+            respuestaIntentos = leerIntentos();
+            intentosCorrecto = comprobarIntentos(respuestaIntentos);
+        }while(!intentosCorrecto);
+        
+        return respuestaIntentos;
+    }
     
 }
