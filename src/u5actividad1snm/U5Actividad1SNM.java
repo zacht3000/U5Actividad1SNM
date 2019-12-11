@@ -51,15 +51,18 @@ public class U5Actividad1SNM {
         
         
         
-
         do {
             respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
+   
+               
+            String mezcla = mezclarLetras(palabraSecreta);
             seHaAcertado = resolverRespuesta(palabraSecreta, respuestaUsuario);
 
             if (respuestaIntentos-- <= 1) {
                 seHaAcertado = true;
             }
-           
+         
+                
         } while (!seHaAcertado);
     }
 
@@ -337,6 +340,24 @@ public class U5Actividad1SNM {
         } while (!dificultadCorrecto);
 
         return respuestaDificultad;
+    }
+
+    public String mezclarLetras(String palabraSecreta) {
+        Random rnd = new Random();
+
+        char[] letras = new char[palabraSecreta.length()];
+        for (Integer i = 0; i < letras.length; i++) {
+            letras[i] = palabraSecreta.charAt(i);
+        }
+
+        for (Integer i = 0; i < letras.length; i++) {
+            Integer positionX = (rnd.nextInt(letras.length));
+            Character mezcla = letras[positionX];
+            letras[positionX] = letras[i];
+            letras[i] = mezcla;
+        }
+        String palabra = new String(letras);
+        return palabra;
     }
 
 }
