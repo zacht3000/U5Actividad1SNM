@@ -46,23 +46,18 @@ public class U5Actividad1SNM {
         scanner.nextLine(); // Limpiar Buffer
         respuestaDificultad = validarDificultad();
         scanner.nextLine(); // Limpiar Buffer
+        Integer rango = elegirRango(respuestaDificultad);
         String palabraSecreta = generarPalabraSecreta(respuestaTamaño);
-        
-        
-        
         
         do {
             respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
-   
-               
             String mezcla = mezclarLetras(palabraSecreta);
             seHaAcertado = resolverRespuesta(palabraSecreta, respuestaUsuario);
-
+            rangoMezclar(respuestaIntentos, rango, palabraSecreta, mezcla);
+            //Condición para poder los intentos
             if (respuestaIntentos-- <= 1) {
                 seHaAcertado = true;
-            }
-         
-                
+            }      
         } while (!seHaAcertado);
     }
 
@@ -313,11 +308,11 @@ public class U5Actividad1SNM {
     /**
      * MEJORA AÑADIR DIFICULTAD
      *
-     * @param leerIntentos Leer el tamaño
-     * @param validarIntentos Devuelve un valor booleano, para comprobar si esta
+     * @param leerDificultad Leer el tamaño
+     * @param comprobarDificultad Devuelve un valor booleano, para comprobar si esta
      * entre 1 y 8
      * @return CIERTO si el número se encuentra entre 1 y 8, FALSO si no
-     * @param validarIntentos Devuelve el valor introducido una vez haya pasado
+     * @param validarDificultad Devuelve el valor introducido una vez haya pasado
      * el filtro
      */
     public Integer leerDificultad() {
@@ -341,7 +336,11 @@ public class U5Actividad1SNM {
 
         return respuestaDificultad;
     }
-
+    /**
+     * MEJORA MEZLAR PALABRA SECRETA
+     *
+     * @param mezclarLetras Leer el tamaño
+     */
     public String mezclarLetras(String palabraSecreta) {
         Random rnd = new Random();
 
@@ -359,5 +358,26 @@ public class U5Actividad1SNM {
         String palabra = new String(letras);
         return palabra;
     }
-
+    /**
+     * MEJORA MEZLAR PALABRA SECRETA
+     *
+     * @param elegirNivel retorna la difuicultad eleguida para añadir el rango.
+     * @return 3 o 2.
+     * @param rangoMezclar aquí se mezclan las palabras con el rango devuleto.
+     */
+    public Integer elegirRango(Integer dificultad){
+        Integer rango = null;
+        if(dificultad == 3)
+            rango = 2;
+        if(dificultad == 2)
+            rango = 5;
+        return rango;
+    }
+    public void rangoMezclar(Integer intentos, Integer rango, String palabraSecreta, String mezcla) {
+        if(intentos % rango == 0){
+            palabraSecreta = mezclarLetras(palabraSecreta);
+            System.out.println("Palabra secreta mezclada.");
+        }
+  
+    }
 }
