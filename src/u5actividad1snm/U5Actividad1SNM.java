@@ -38,6 +38,7 @@ public class U5Actividad1SNM {
         Integer respuestaIntentos;
         Integer respuestaDificultad;
         Boolean seHaAcertado;
+        Integer cont = 1;
 
         /* Metodos */
         respuestaTamaño = validarTamaño();
@@ -48,14 +49,22 @@ public class U5Actividad1SNM {
         scanner.nextLine(); // Limpiar Buffer
         Integer rango = elegirRango(respuestaDificultad);
         String palabraSecreta = generarPalabraSecreta(respuestaTamaño);
+        System.out.println(palabraSecreta);
         
         do {
             respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
             String mezcla = mezclarLetras(palabraSecreta);
+            Boolean seMezcla = rangoMezclar(respuestaIntentos, rango, palabraSecreta, mezcla, cont);
+            
+            //Condición para poder mezclar la letra
+            if(seMezcla)
+                palabraSecreta = mezcla;
+            
             seHaAcertado = resolverRespuesta(palabraSecreta, respuestaUsuario);
-            rangoMezclar(respuestaIntentos, rango, palabraSecreta, mezcla);
+            System.out.println(palabraSecreta);
+            
             //Condición para poder los intentos
-            if (respuestaIntentos-- <= 1) {
+            if (cont++ == respuestaIntentos) {
                 seHaAcertado = true;
             }      
         } while (!seHaAcertado);
@@ -359,25 +368,26 @@ public class U5Actividad1SNM {
         return palabra;
     }
     /**
-     * MEJORA MEZLAR PALABRA SECRETA
+     * MEJORA MEZCLAR PALABRA SECRETA
      *
      * @param elegirNivel retorna la difuicultad eleguida para añadir el rango.
      * @return 3 o 2.
      * @param rangoMezclar aquí se mezclan las palabras con el rango devuleto.
      */
     public Integer elegirRango(Integer dificultad){
-        Integer rango = null;
+        Integer rango = 37;
         if(dificultad == 3)
             rango = 2;
         if(dificultad == 2)
             rango = 5;
         return rango;
     }
-    public void rangoMezclar(Integer intentos, Integer rango, String palabraSecreta, String mezcla) {
-        if(intentos % rango == 0){
-            palabraSecreta = mezclarLetras(palabraSecreta);
+    public Boolean rangoMezclar(Integer intentos, Integer rango, String palabraSecreta, String mezcla, Integer contador) {
+        if(contador % rango == 0){
             System.out.println("Palabra secreta mezclada.");
+            return true;
         }
+        return false;
   
     }
 }
