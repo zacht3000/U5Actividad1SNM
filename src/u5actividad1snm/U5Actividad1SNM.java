@@ -54,7 +54,7 @@ public class U5Actividad1SNM {
         do {
             respuestaUsuario = pedirRespuestaEnFormatoValido(respuestaTamaño);
             String mezcla = mezclarLetras(palabraSecreta);
-            Boolean seMezcla = rangoMezclar(respuestaIntentos, rango, palabraSecreta, mezcla, cont);
+            Boolean seMezcla = rangoMezclar(rango, cont);
             
             //Condición para poder mezclar la letra
             if(seMezcla)
@@ -382,7 +382,7 @@ public class U5Actividad1SNM {
             rango = 5;
         return rango;
     }
-    public Boolean rangoMezclar(Integer intentos, Integer rango, String palabraSecreta, String mezcla, Integer contador) {
+    public Boolean rangoMezclar(Integer rango, Integer contador) {
         if(contador % rango == 0){
             System.out.println("Palabra secreta mezclada.");
             return true;
